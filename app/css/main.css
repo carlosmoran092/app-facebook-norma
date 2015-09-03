@@ -1,3 +1,4 @@
-.container-portada{padding: 10px; text-align: center; padding: 20px;}
+.container-portada{padding: 10px; text-align: center; padding: 20px; -webkit-transition: 0.4s;}
+.container-portada:click{background: #C6E7F6;outline: 2px solid #0083A9;}
 .container-portada:hover{background: #C6E7F6;outline: 2px solid #0083A9; border-radius: 4px;}
 #cuestionario{border-left:1px solid #999;border-right:1px solid #999;  float: left;}
