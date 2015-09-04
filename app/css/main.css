@@ -1,4 +1,6 @@
 .container-portada{padding: 10px; text-align: center; padding: 20px; -webkit-transition: 0.4s;}
 .container-portada:hover{background: #C6E7F6;outline: 2px solid #0083A9; border-radius: 4px;}
 #cuestionario{border-left:1px solid #999;border-right:1px solid #999;  float: left;}
+.btn-cancel{}
+.btn-cancel>img{width: 60px; clear: both; float: left; position: absolute;top: 0; left: 0; display: none}
 

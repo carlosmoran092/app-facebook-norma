@@ -1,14 +1,34 @@
-$(".portada" ).click(function() {
-	var oID = $(this).attr("id");
-  alert( oID ); 
-  var idPadre = $(this).parents("span:first").attr("id");
-  alert(idPadre);
-  $(this).parents("span:first").css('background', '#444')/*aparecer label para cancelar selección*/;
+var positivo = new Object();
+var negativo = new Object();
 
-  // agregar a arreglo de respuestas positivas si atributo x es positivo si es negativo, ira en negativo.
-// Si click en label cancelar
- // Quitar selección (quitar color de fondo)
- //eliminar del arreglo si respuesta es negativa
+positivo.seleccionadas = [];
+$(".portada" ).click(function() {
+  var id = $(this).attr("id");
+  
+  if (positivo.id!=id) {
+	  alert( id ); 
+	  var idPadre = $(this).parents("span:first").attr("data-name");
+	  alert(idPadre);
+	  $(this).parents("span:first").css('background', '#C6E7F6') /*aparecer label para cancelar selección*/;
+	   var Arrseleccion = positivo.seleccionadas;
+	   Arrseleccion.push(idPadre);
+	  alert(positivo.seleccionadas);
+	  // agregar a arreglo de respuestas positivas si atributo x es positivo si es negativo, ira en negativo.
+	  // Si click en label cancelar
+	  // Quitar selección (quitar color de fondo)
+	  //eliminar del arreglo si respuesta es negativa
+	  
+	 /*----------  Código para boton de cancelar selección  ----------*/
+
+  } else{alert("nada pasa")};
+
+ 
+});
+
+$(".btn-cancel").click(function(event) {
+	//$(this).parents("span:first").css('background', '#fff').attr("data-name");
+	opt = $(this).parents("span:first",this).parents("");
+	alert(opt);
 });
 
 
