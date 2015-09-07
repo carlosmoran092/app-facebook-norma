@@ -3,12 +3,36 @@ var positivo = new Object();
 var negativo = new Object();
 positivo.seleccionadas = [];
 
+
+
+/*----------  HOMBRE Y MUJER  ----------*/
+
+
+$('#female').click(function(event) {
+	alert("seleccionaste mujer")
+});
+
+
+$('#male').click(function(event) {
+	alert("seleccionaste hombre")
+});
+
+
+
+
+/*---------- FIN HOMBRE Y MUJER  ----------*/
+
+
+
+
+
+
 $(".portada" ).click(function() {
   var id = $(this).attr("id");
     var activo = $(this).attr('data-active');
   alert(activo);
 
-
+//inArray
 
 //$(this).attr('data-active', 'true');
 
@@ -39,10 +63,8 @@ $(".portada" ).click(function() {
  
 });
 
-$(".btn-cancel").click(function(event) {
-	//$(this).parents("span:first").css('background', '#fff').attr("data-name");
-	opt = $(this).parents("span:first",this).parents("");
-	alert(opt);
+$("#btn-siguiente").click(function() {
+//capturar variable de numero-pregunta
+$( "#cuestionario" ).load( "app/poll/male/tipo1.txt" );
 });
-
 
