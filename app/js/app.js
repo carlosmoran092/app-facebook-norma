@@ -9,7 +9,7 @@ positivo.seleccionadas = [];
 
 $("#comienzo-test").on("click",function(event) 
 {
-	mostrarHTML("female/genero");
+	mostrarHTML("seleccionGenero");
 });
 
 
@@ -21,11 +21,12 @@ $("#comienzo-test").on("click",function(event)
 /*----------  HOMBRE O MUJER  ----------*/
 
 
-$('#female').click(function(event) {
-	alert("seleccionaste mujer")
+$('#cambio').on("click","#female",function(event) {
+	alert("seleccionaste mujer");
+	mostrarHTML("female/seleccionar_tipo");
 });
 
-$('#male').click(function(event) {
+$('#cambio').on("click","#male",function(event) {
 	alert("seleccionaste hombre")
 });
 
@@ -35,12 +36,13 @@ $('#male').click(function(event) {
 /*----------  ESTILO MUJER  ----------*/
 
 
-$('.btn-style-female').on("click",function(event){
+$('#cambio').on("click",".btn-style-female",function(event){
 style_female=$(this).attr("data-select");
 switch(style_female){
 	case "tipo-1":
 		alert("tipo 1");		
 		mostrarHTML("female/tipo1");
+		mostrarBotones();
 		break;
 
 	case "tipo-2":
@@ -62,13 +64,18 @@ switch(style_female){
 } });
 
 function mostrarHTML (tipo){
-	$.get("app/poll/"+tipo+".html", function(data, status){
-            $("#cambio").html(data);
-       });
-	//$("#pasadores").css('display', 'block');
-};
+	
+    $("#cambio").load("app/poll/"+tipo+".html");
+     	//$("#pasadores").css('display', 'block');
+	};
+
+function mostrarBotones(){
+	$("#pasadores").css('display','block');
+}
+
 // 
  
+
 
 /*----------  FIN ESTILO MUJER  ----------*/
 
