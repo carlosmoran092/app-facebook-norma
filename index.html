@@ -6,11 +6,8 @@
   <title>APP DEV</title>
   <link rel="stylesheet" href="app/bower_components/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" href="app/css/main.css">
- 
-
-
-
   
+   
 </head>
 
 <body>
@@ -20,20 +17,29 @@
 <div class="col-md-10 col-md-offset-1" data-estilo="1">
 <div id="cambio">
 
-<div id="cuestionario" style="display:none;"> <!-- PREGUNTA -->
-<center><img src="app/img/banners/genero.jpg" alt="placeholder+image" class="img-responsive"></center>
-  <div class="col-md-10 col-md-offset-1">
-    <div class="col-md-6 col-sm-6 col-xs-12 genero">
-    <img src="app/img/banners/mujer.jpg" alt="" id="female" class="img-responsive"></div>
-    <div class="col-md-6 col-sm-6 col-xs-12 genero">
-    <img src="app/img/banners/hombre.jpg" alt="" id="male" class="img-responsive">
-    </div>    
-  </div>
-</div>
-
-
 <!--====  Tipo de Mujer  =====-->
 
+<div id="cuestionario"> <!-- PREGUNTA -->
+<div id="pregunta-1">
+<br>
+<center>
+<img src="app/img/banners/female/tipo1/banner1.jpg" alt="placeholder+image" class="img-responsive"></center>
+    <div class="col-md-10 col-md-offset-1">
+      <div class="col-md-6 col-sm-6 col-xs-6 genero">
+      <img src="app/img/banners/female/personalidad1.jpg" data-select="tipo-1" alt=""  class="img-responsive btn-style-female"></div>
+      <div class="col-md-6 col-sm-6 col-xs-6 genero">
+      <img src="app/img/banners/female/personalidad2.jpg" data-select="tipo-2" alt=""  class="img-responsive btn-style-female">
+      </div> 
+
+      <div class="col-md-6 col-sm-6 col-xs-6 genero">
+      <img src="http://dummyimage.com/461x418/682/fff.gif&text=placeholder+image" data-select="tipo-3" alt="" id="female" class="img-responsive btn-style-female"></div>
+
+      <div class="col-md-6 col-sm-6 col-xs-6 genero">
+      <img src="http://dummyimage.com/461x418/e5e/fff.gif&text=placeholder+image" data-select="tipo-4" alt="" id="male" class="img-responsive btn-style-female">
+      </div>  
+    </div>
+  </div>
+</div>
 
 
 <!--=====  Fin tipo de mujer  ======-->
@@ -43,7 +49,7 @@
 
 </div><!-- End Cambio -->
 </div>
-<div class="col-md-10 col-md-offset-1 pull-right" style="display:none;">
+<div id="pasadores" class="col-md-10 col-md-offset-1 pull-right disabled" style="display:none;">
 <button type="button" class="btn btn-primary btn-lg" id="btn-anterior">Anterior</button>
 <button type="button" class="btn btn-primary btn-lg" id="btn-siguiente">Siguiente</button>
 </div>
@@ -53,7 +59,9 @@
 </div>
 </div>
 
+
 <script src="app/bower_components/jquery/dist/jquery.js"></script>
+  <script type="text/javascript" src="app/js/app.js"></script>
  <script src="app/js/jquery.nicescroll.min.js"></script>
   <script>
 
@@ -61,7 +69,7 @@ var nice = false;
 $(document).ready( function() { nice = $("html").niceScroll({cursorcolor:"rgb(0, 131, 169)",cursorwidth:"10px"});});
 
   </script>
-<script type="text/javascript" src="app/js/app.js"></script>
+
 
 </body>
 </html>
