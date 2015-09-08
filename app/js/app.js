@@ -2,6 +2,22 @@ var tipo_pregunta = true;
 var positivo = new Object();
 var negativo = new Object();
 positivo.seleccionadas = [];
+
+
+/*----------  COMENZAR TEST  ----------*/
+
+
+$("#comienzo-test").on("click",function(event) 
+{
+	mostrarHTML("female/genero");
+});
+
+
+/*----------  COMENZAR TEST  ----------*/
+
+
+
+
 /*----------  HOMBRE O MUJER  ----------*/
 
 
@@ -24,11 +40,12 @@ style_female=$(this).attr("data-select");
 switch(style_female){
 	case "tipo-1":
 		alert("tipo 1");		
-		mostrarPregunta("tipo1");
+		mostrarHTML("female/tipo1");
 		break;
 
 	case "tipo-2":
 		alert("tipo 2");
+		mostrarHTML("female/tipo2");
 	break;
 
 	case "tipo-3":
@@ -44,16 +61,18 @@ switch(style_female){
 		break;
 } });
 
-function mostrarPregunta (tipo){
-	$.get("app/poll/female/"+tipo+".html", function(data, status){
+function mostrarHTML (tipo){
+	$.get("app/poll/"+tipo+".html", function(data, status){
             $("#cambio").html(data);
        });
-	$("#pasadores").css('display', 'block');
+	//$("#pasadores").css('display', 'block');
 };
 // 
  
 
 /*----------  FIN ESTILO MUJER  ----------*/
+
+
 
 $("#cambio" ).on("click",".portada",function() {
   	var id = $(this).attr("id");

@@ -5,3 +5,4 @@
 .btn-cancel>img{width: 60px; clear: both; float: left; position: absolute;top: 0; left: 0; display: none}
 .genero{margin: 20px 0px 40px 0px; transition: 0.4s; }
 .genero>img:hover{border:5px solid rgb(0, 131, 169);-webkit-transition:0.4s; cursor: pointer;}
+#comienzo-test{float: left; top: 83%; left: 37%; position: absolute;}
