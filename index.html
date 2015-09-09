@@ -3,9 +3,13 @@
 <head>
 
   <meta charset="UTF-8">
+  <meta http-equiv="PRAGMA" content="NO-CACHE">
+
   <title>APP DEV</title>
   <link rel="stylesheet" href="app/bower_components/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" href="app/css/main.css">
+
+
 
    
 </head>
@@ -24,16 +28,22 @@
     
     </div><!-- End Cambio -->
   </div>
-<div id="pasadores" class="col-md-10 col-md-offset-1 pull-right disabled" style="display:none;">
+
+</div>
+<div id="pasadores" class="col-md-12 disabled pull-right" style="display:none;">
 <hr>
-  <button type="button" class="btn btn-primary btn-lg" id="btn-anterior">Anterior</button>
-  <button type="button" class="btn btn-primary btn-lg" id="btn-siguiente">Siguiente</button>
+<div class="col-md-5 col-md-offset-4">
+  <center>
+<img src="app/img/inicio/atras.png" id="anterior" class="img-responsive pasadores">
+<img src="app/img/inicio/siguiente.png" id="siguiente" class="img-responsive pasadores">
+
+</center>
 </div>
 
 
-
+  
+  <!-- <button type="button" class="btn btn-primary btn-lg" id="btn-siguiente">Siguiente</button> -->
 </div>
-
 
   <script src="app/bower_components/jquery/dist/jquery.js"></script>
   <script type="text/javascript" src="app/js/app.js"></script>

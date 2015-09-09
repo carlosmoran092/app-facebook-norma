@@ -1,8 +1,23 @@
-.container-portada{padding: 10px; text-align: center; padding: 20px; -webkit-transition: 0.4s;}
+.container-portada{padding: 10px; text-align: center; padding: 20px; -webkit-transition: 0.4s;-moz-transition: 0.4s;}
 .container-portada:hover{background: #C6E7F6;outline: 2px solid #0083A9; border-radius: 4px; z-index: 100;}
 #cuestionario{border-left:1px solid #999;border-right:1px solid #999;  float: left;}
 .btn-cancel{}
 .btn-cancel>img{width: 60px; clear: both; float: left; position: absolute;top: 0; left: 0; display: none}
 .genero{margin: 20px 0px 40px 0px; transition: 0.4s; }
-.genero>img:hover{border:5px solid rgb(0, 131, 169);-webkit-transition:0.4s; cursor: pointer;}
+
+.genero>img:hover{border:5px solid rgb(0, 131, 169);-webkit-webkit-transition: 0.4;
+	-moz-webkit-transition: 0.4;-ms-webkit-transition: 0.4;-o-webkit-transition: 0.4;
+	webkit-transition: 0.4; cursor: pointer;}
+#comienzo-test{-webkit-webkit-transition: 0.4;
+	-moz-webkit-transition: 0.4;-ms-webkit-transition: 0.4;-o-webkit-transition: 0.4;
+	webkit-transition: 0.4; cursor: pointer;}
+
 #comienzo-test{float: left; top: 83%; left: 37%; position: absolute;}
+.pasadores{max-width: 200px; display: inline-block;float: left;margin-right: 15px; transition: 0.8s; -moz-transition:0.8s;}
+#comienzo-test:hover,.pasadores:hover{cursor:pointer;-webkit-transform: -webkit-transform: scale(1.1,1.1);
+-ms-transform: scale(1.1,1.1);
+-o-transform: scale(1.1,1.1);
+transform: scale(1.1,1.1); ;}
+#pasadores{}
+
+

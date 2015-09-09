@@ -1,3 +1,12 @@
+/**
+*Revisión: 09092015
+*Carlos Morán
+*https://developers.facebook.com/docs/graph-api/reference/user
+*/
+
+
+
+
 var tipo_pregunta = true;
 var positivo = new Object();
 var negativo = new Object();
@@ -70,11 +79,10 @@ function mostrarHTML (tipo){
 	};
 
 function mostrarBotones(){
-	$("#pasadores").css('display','block');
+	$("#pasadores").css('display','inline-block');
 }
 
 // 
- 
 
 
 /*----------  FIN ESTILO MUJER  ----------*/
@@ -122,5 +130,9 @@ $("#btn-siguiente").click(function() {
 });
 
 
+/*****  BOTONES ANTERIOR Y SIGUIENTE   *****/
 
+$("#cambio" ).on("click",".pasadores",function() {
+
+});
 
