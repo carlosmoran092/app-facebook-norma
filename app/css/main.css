@@ -9,7 +9,7 @@
 	-moz-webkit-transition: 0.4;-ms-webkit-transition: 0.4;-o-webkit-transition: 0.4;
 	webkit-transition: 0.4; cursor: pointer;}
 #comienzo-test{-webkit-webkit-transition: 0.4;
-	-moz-webkit-transition: 0.4;-ms-webkit-transition: 0.4;-o-webkit-transition: 0.4;
+	-moz-webkit-transition: 0.4;-ms-webkit-transition: 0.4;-o-webkit-transition: 0.7;
 	webkit-transition: 0.4; cursor: pointer;}
 
 #comienzo-test{float: left; top: 83%; left: 37%; position: absolute;}
