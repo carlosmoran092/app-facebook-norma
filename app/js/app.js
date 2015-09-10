@@ -155,7 +155,7 @@ $("#cambio" ).on("click",".portada",function() {
 	
 	// SI HAY COINCIDENCIA ENTRE RESPUES Y PREGUNTA SE PUEDE EDITAR
 	
-	else if(activo === tipoPregunta){
+	else if(activo == tipoPregunta){
 		console.log("esta por deseleccionar portada "+tipoPregunta);
 			var removeItem = idPadre;
 			switch(tipoPregunta){
@@ -164,14 +164,15 @@ $("#cambio" ).on("click",".portada",function() {
 					return value != removeItem; });
 					console.log("eliminado: "+tipoPregunta+" item: "+removeItem);
 					$(this).parents("span:first").css('background', '#fff');
-					$(this).removeAttr('rating').removeAttr('data-active');
+					$("[data-name="+removeItem+"]").removeAttr('rating').removeAttr('data-active');
 					break;
 				case "negative":
 					negative.seleccionadas = jQuery.grep(negative.seleccionadas, function(value) {
 					return value != removeItem; });
 					console.log("eliminado: "+tipoPregunta+" item: "+removeItem);
 					$(this).parents("span:first").css('background', '#fff');
-					$(this).removeAttr('rating').removeAttr('data-active');
+					$("[data-name="+removeItem+"]").removeAttr('rating').removeAttr('data-active');
+					
 					break;
 				default:
 					console.log('error en elminación');
