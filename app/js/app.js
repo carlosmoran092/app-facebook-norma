@@ -32,10 +32,45 @@ $('#cambio').on("click","#female",function(event) {
 });
 
 $('#cambio').on("click","#male",function(event) {
-	console.log("seleccionaste hombre")
+	console.log("seleccionaste hombre");
+	mostrarHTML("male/seleccionar_tipo");
 });
 
 /*---------- FIN HOMBRE Y MUJER  ----------*/
+
+
+
+
+$('#cambio').on("click",".btn-style-male",function(event){
+style_female=$(this).attr("data-select");
+switch(style_female){
+	case "tipo-1":
+		console.log("tipo 1");		
+		mostrarHTML("male/tipo1");
+		mostrarBotones();		
+		break;
+
+	case "tipo-2":
+		console.log("tipo 2");
+		mostrarHTML("male/tipo2");
+		mostrarBotones();
+	break;
+
+	case "tipo-3":
+		console.log("tipo 3");
+		break;
+
+	case "tipo-4":
+		console.log("tipo 4");
+		break;
+
+	default:
+		console.log("Indefinido");
+		break;
+} });
+
+
+
 
 
 /*----------  ESTILO MUJER  ----------*/
@@ -53,6 +88,7 @@ switch(style_female){
 	case "tipo-2":
 		console.log("tipo 2");
 		mostrarHTML("female/tipo2");
+		mostrarBotones();
 	break;
 
 	case "tipo-3":
