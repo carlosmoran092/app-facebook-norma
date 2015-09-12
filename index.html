@@ -8,21 +8,81 @@
   <title>APP DEV</title>
   <link rel="stylesheet" href="app/bower_components/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" href="app/css/main.css">
-
-
-
-   
+     
 </head>
 <body>
+<script>
+ 
+  function statusChangeCallback(response) {
+    console.log('statusChangeCallback');
+    console.log(response);
+    
+    if (response.status === 'connected') {
+      
+      testAPI();
+    } else if (response.status === 'not_authorized') {
+      
+      document.getElementById('status').innerHTML = 'Please log ' +
+        'into this app.';
+    } else {
+      
+      document.getElementById('status').innerHTML = 'Please log ' +
+        'into Facebook.';
+    }
+  }
+
+
+  function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+  }
+
+  window.fbAsyncInit = function() {
+  FB.init({
+    appId      : '405791719620440',
+    cookie     : true,                          
+    xfbml      : true,  
+    version    : 'v2.4' 
+  });
+
+  FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+  });
+  };
+  // Load the SDK asynchronously
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+  function testAPI() {
+    console.log('Welcome!  Fetching your information.... ');
+    FB.api('/me', function(response) {
+      console.log('Successful login for: ' + response.name);
+      document.getElementById('status').innerHTML =
+        'Thanks for logging in, ' + response.name + '!';
+    });
+  }
+</script>
+
+<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+</fb:login-button>
+
+<div id="status">
+</div>
+
 
 <div class="container-fluid">
 
   <div class="col-md-10 col-md-offset-1" data-estilo="1">
     <div id="cambio">         
        
-          <img src="app/img/inicio/fondo.jpg" class="img-responsive" alt="">
-          <img src="app/img/inicio/boton.png" class="img-responsive col-md-3 col-sm-3 col-xs-3" width="185" id="comienzo-test">    
-
+    <img src="app/img/inicio/fondo.jpg" class="img-responsive" alt="">
+    <img src="app/img/inicio/boton.png" scope="public_profile,email" onlogin="checkLoginState();" class="img-responsive col-md-3 col-sm-3 col-xs-3" width="185" id="comienzo-test">
     
     </div><!-- End Cambio -->
   </div>
@@ -32,8 +92,15 @@
 <hr>
 <div class="col-md-5 col-md-offset-4">
   <center>
-<img src="app/img/inicio/atras.png" id="anterior" class="img-responsive pasadores">
-<img src="app/img/inicio/siguiente.png" id="siguiente" class="img-responsive pasadores">
+
+
+<img src="app/img/inicio/atras.png"  class="img-responsive pasadores" href="#myCarousel" role="button" data-slide="prev">
+
+<img src="app/img/inicio/siguiente.png"  class="img-responsive pasadores" href="#myCarousel" role="button" data-slide="next">
+
+
+<!-- <img src="app/img/inicio/atras.png" id="anterior"  data-pasador="-1" class="img-responsive pasadores">
+<img src="app/img/inicio/siguiente.png" id="siguiente" data-pasador="1" class="img-responsive pasadores"> -->
 
 </center>
 </div>
@@ -42,9 +109,18 @@
   
   <!-- <button type="button" class="btn btn-primary btn-lg" id="btn-siguiente">Siguiente</button> -->
 </div>
-
+  
   <script src="app/bower_components/jquery/dist/jquery.js"></script>
+
+  <script type="text/javascript" src="app/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <script src="app/bower_components/jquery-ui/ui/effect-shake.js"></script>
   <script type="text/javascript" src="app/js/app.js"></script>
+
+
+
+ 
 <!--
  <script src="app/js/jquery.nicescroll.min.js"></script>
   <script>

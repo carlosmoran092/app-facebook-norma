@@ -1,5 +1,5 @@
 /**
-*Revisión: 09092015
+*Revisión: 011092015
 *Carlos Morán
 *https://developers.facebook.com/docs/graph-api/reference/user
 */
@@ -7,25 +7,25 @@
 var tipo_pregunta = true;
 var positive = new Object();
 var negative = new Object();
+var ubicacion = [1];
 positive.seleccionadas = [];
 negative.seleccionadas = [];
+
 
 
 /*----------  COMENZAR TEST  ----------*/
 
 
 $("#comienzo-test").on("click",function(event) 
-{
-	mostrarHTML("seleccionGenero");
+{	  
+mostrarHTML("seleccionGenero");
 });
 
 /*----------  COMENZAR TEST  ----------*/
 
 
 
-
 /*----------  HOMBRE O MUJER  ----------*/
-
 $('#cambio').on("click","#female",function(event) {
 	console.log("seleccionaste mujer");
 	mostrarHTML("female/seleccionar_tipo");
@@ -35,18 +35,65 @@ $('#cambio').on("click","#male",function(event) {
 	console.log("seleccionaste hombre");
 	mostrarHTML("male/seleccionar_tipo");
 });
-
 /*---------- FIN HOMBRE Y MUJER  ----------*/
 
 
+/*========================================
+=     FUNCIÓN PASADOR DE PREGUNTAS    =
+=========================================*/
+
+function pasadorPreguntas(npasador){
+	var np = contarPreguntas ();
+
+	if(np <= np && np > 0){
+		//$("[data-pregunta='"++"']")
+		sl = 2;
+		var valorboton=(parseInt(npasador));
+		return (valorboton);
+		 
+	}
+
+}
+
+/*
+$("body").on('click', '.pasadores', function(event) {
+var data_pasador = $(this).attr('data-pasador');
+npasador= pasadorPreguntas(data_pasador);
+
+np = contarPreguntas ();
+	if(np <= np && ubicacion[0] >= 1 && ubicacion[0] <= np){
+		contador = ubicacion[0];
+		preg = npasador;
+		mostrar = contador+(preg);
+
+		var selector=".pregunta:nth-child("+mostrar+")";
+
+		var quitar=".pregunta:nth-child("+contador+")";
+
+		$(quitar).css('display', 'none');
+		console.log('dja de verse :div.pregunta: '+quitar);
+
+		$(selector).attr('style', 'display:block');
+		console.log('se muestra :div.pregunta: '+selector);
+		ubicacion[0]=mostrar;
+		var contador=+npasador;     
+	}
+	else{
+	console.log('No continua');}
+
+});
+*/
 
 
+
+/*---------- HOMBRES  ----------*/
 $('#cambio').on("click",".btn-style-male",function(event){
 style_female=$(this).attr("data-select");
+$('.carousel').carousel({interval: false,keyboard:false,});
 switch(style_female){
 	case "tipo-1":
 		console.log("tipo 1");		
-		mostrarHTML("male/tipo1");
+		mostrarHTML("male/tipo1");		
 		mostrarBotones();		
 		break;
 
@@ -58,10 +105,14 @@ switch(style_female){
 
 	case "tipo-3":
 		console.log("tipo 3");
+		mostrarHTML("male/tipo3");
+		mostrarBotones();
 		break;
 
 	case "tipo-4":
 		console.log("tipo 4");
+		mostrarHTML("male/tipo4");		
+		mostrarBotones();
 		break;
 
 	default:
@@ -70,11 +121,7 @@ switch(style_female){
 } });
 
 
-
-
-
 /*----------  ESTILO MUJER  ----------*/
-
 
 $('#cambio').on("click",".btn-style-female",function(event){
 style_female=$(this).attr("data-select");
@@ -90,15 +137,11 @@ switch(style_female){
 		mostrarHTML("female/tipo2");
 		mostrarBotones();
 	break;
-
 	case "tipo-3":
 		console.log("tipo 3");
-		break;
-
-	case "tipo-4":
-		console.log("tipo 4");
-		break;
-
+		mostrarHTML("female/tipo3");
+		mostrarBotones();
+	break;
 	default:
 		console.log("Indefinido");
 		break;
@@ -106,8 +149,7 @@ switch(style_female){
 
 function mostrarHTML (tipo){
 	
-    $("#cambio").load("app/poll/"+tipo+".html");
-     	//$("#pasadores").css('display', 'block');     	
+    $("#cambio").load("app/poll/"+tipo+".html");  	
 	};
 
 function mostrarBotones(npreguntas){
@@ -149,10 +191,7 @@ function verificarRating (mycues,rating) {
 
 // 
 
-
 /*----------  FIN ESTILO MUJER  ----------*/
-
-
 
 $("#cambio" ).on("click",".portada",function() {
 	
@@ -168,7 +207,7 @@ $("#cambio" ).on("click",".portada",function() {
 	  	console.log(id); 	  
 		
 		console.log("guardado: "+idPadre);	
-		var Arrseleccion = tipoPregunta+".seleccionadas"; //conReg = tipoPregunta.seleccionadas[idPadre];
+		var Arrseleccion = tipoPregunta+".seleccionadas"; 
 		console.log('se ha guardado en: '+Arrseleccion);
 		
 		mycues=$(this).parents("div:first").parents("div:first").attr('data-pregunta');
@@ -185,7 +224,9 @@ $("#cambio" ).on("click",".portada",function() {
 		$("[data-name="+nameportada+"]").attr('rating',key[0]);
 		$("[data-name="+nameportada+"]").attr('data-active',key[0]);
 		$(this).parents("span:first").css('background', '#C6E7F6');
+		$("[data-name="+nameportada+"]").css('outline','1px solid #0083A9');
 		console.log("Incrustado rating: "+key[0])	
+
 
 	}
 	
@@ -201,6 +242,7 @@ $("#cambio" ).on("click",".portada",function() {
 					console.log("eliminado: "+tipoPregunta+" item: "+removeItem);
 					$(this).parents("span:first").css('background', '#fff');
 					$("[data-name="+removeItem+"]").removeAttr('rating').removeAttr('data-active');
+					$("[data-name="+nameportada+"]").css('outline','none');
 					break;
 				case "negative":
 					negative.seleccionadas = jQuery.grep(negative.seleccionadas, function(value) {
@@ -208,7 +250,7 @@ $("#cambio" ).on("click",".portada",function() {
 					console.log("eliminado: "+tipoPregunta+" item: "+removeItem);
 					$(this).parents("span:first").css('background', '#fff');
 					$("[data-name="+removeItem+"]").removeAttr('rating').removeAttr('data-active');
-					
+					$("[data-name="+nameportada+"]").css('outline','none');
 					break;
 				default:
 					console.log('error en elminación');
@@ -216,50 +258,11 @@ $("#cambio" ).on("click",".portada",function() {
 			}
 		}
 		else if(activo != tipoPregunta){
-		console.log("Ya lo has seleccionado anteriormente");			
+		console.log("Ya lo has seleccionado anteriormente");
+		$(this).effect( "shake" );			
 		}
-
-
-
-//////////////////////////
-
-
-	else if(activo == true){
-	console.log('else if(activo == true)');
-	var valor_pregunta=$(this).parents("span:first").parents("div:first").attr("data-tipo");
-	var rating_portada=$(this).attr("rating");
-	console.log(valor_pregunta+" "+valor_portada);
-
-		if(tipoPregunta == rating_portada){
-
-		console.log("deseleccionada");
-		activo = $(this).removeAttr('data-active');
-		$(this).removeAttr('rating');
-		$(this).parents("span:first").css('background', '#fff');
-		idPadre = $(this).parents("span:first").attr("data-name");
-		console.log("item eliminado: "+idPadre);
-
-		var removeItem = idPadre;
-			if(tipoPregunta=="positive"){
-				var removeItem = idPadre;
-				positive.seleccionadas = jQuery.grep(positive.seleccionadas, function(value) {
-				return value != removeItem;
-				});
-			}else{
-				var removeItem = idPadre;
-				negative.seleccionadas = jQuery.grep(negative.seleccionadas, function(value) {
-				return value != removeItem;
-				});
-			}			
-		}
-		else if(valor_pregunta != valor_portada){
-		alert("Ya lo has seleecionado anteriormente")
-		}
-
-		}else{console.log('Invalido');}
 });
 
 
-/*****  BOTONES ANTERIOR Y SIGUIENTE   *****/
 
 

@@ -3,8 +3,9 @@
 #cuestionario{border-left:1px solid #999;border-right:1px solid #999;  float: left;}
 .btn-cancel{}
 .btn-cancel>img{width: 60px; clear: both; float: left; position: absolute;top: 0; left: 0; display: none}
-.genero{margin: 20px 0px 40px 0px; transition: 0.4s; }
+.genero{margin: 20px 0px 40px 0px; transition: 0.4s;}
 
+.genero>img{border:5px solid #fff;}
 .genero>img:hover{border:5px solid rgb(0, 131, 169);-webkit-webkit-transition: 0.4;
 	-moz-webkit-transition: 0.4;-ms-webkit-transition: 0.4;-o-webkit-transition: 0.4;
 	webkit-transition: 0.4; cursor: pointer;}
@@ -19,5 +20,9 @@
 -o-transform: scale(1.1,1.1);
 transform: scale(1.1,1.1); ;}
 #pasadores{}
+
+
+
+
 
 
