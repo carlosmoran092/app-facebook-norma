@@ -16,14 +16,6 @@ $items = json_decode($_POST['registro']);
    	$seleccion_positiva = implode(",", $items->positivas);
    	$seleccion_negativa = implode(",", $items->negativas);
 
-        // echo $items->nombre .',';
-        // echo $items->genero . ',';
-        // echo $items->email . ',';
-        // echo $items->nacimiento . ',';
-        // echo $items->ubicacion . ',';
-        // echo $seleccion_positiva . ',';
-        // echo $seleccion_negativa . ',';
-        // echo '<br/>';
         $nombre=$items->nombre;
         $genero=$items->genero;
         $email=$items->email;
@@ -32,11 +24,11 @@ $items = json_decode($_POST['registro']);
         $seleccion_positiva=$seleccion_positiva;
         $seleccion_negativa=$seleccion_negativa;
 
-$sql = "INSERT INTO 'registros_usuarios' VALUES (NULL,'$nombre', '$genero', '$email','$nacimiento','$ubicacion','$seleccion_positiva','$seleccion_negativa')";
+$sql = "INSERT INTO registros_usuarios  VALUES (NULL,'$nombre','$email','$genero','$nacimiento','$ubicacion','$seleccion_positiva','$seleccion_negativa')";
 
 
 if ($conn->query($sql) === TRUE) {
-    echo "New record created successfully";
+    echo "Nuevo registro creado";
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }

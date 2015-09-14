@@ -4,7 +4,6 @@
 .btn-cancel{}
 .btn-cancel>img{width: 60px; clear: both; float: left; position: absolute;top: 0; left: 0; display: none}
 .genero{margin: 20px 0px 40px 0px; transition: 0.4s;}
-
 .genero>img{border:5px solid #fff;}
 .genero>img:hover{border:5px solid rgb(0, 131, 169);-webkit-webkit-transition: 0.4;
 	-moz-webkit-transition: 0.4;-ms-webkit-transition: 0.4;-o-webkit-transition: 0.4;
@@ -12,14 +11,19 @@
 #comienzo-test,#finalizar-test{-webkit-webkit-transition: 0.4;
 	-moz-webkit-transition: 0.4;-ms-webkit-transition: 0.4;-o-webkit-transition: 0.7;
 	webkit-transition: 0.4; cursor: pointer;}
-
 #comienzo-test,#finalizar-test{float: left; top: 83%; left: 37%; position: absolute;}
 .pasadores{max-width: 200px; display: inline-block;float: left;margin-right: 15px; transition: 0.8s; -moz-transition:0.8s;}
 #comienzo-test:hover,#finalizar-test:hover,.pasadores:hover{cursor:pointer;-webkit-transform: -webkit-transform: scale(1.1,1.1);
--ms-transform: scale(1.1,1.1);
--o-transform: scale(1.1,1.1);
-transform: scale(1.1,1.1); ;}
+-ms-transform: scale(1.1,1.1);-o-transform: scale(1.1,1.1);transform: scale(1.1,1.1); ;}
 #pasadores{}
+.btn-respuestas{float: left; top: 80%; left: 52%; position: absolute;-webkit-transition: 1s;
+-o-transition: 1s;transition: 1s; -moz-transition:1s;}
+.btn-respuestas>img:hover{cursor: pointer;-webkit-transform: scale(1.1,1.1);
+   -moz-transform: scale(1.1,1.1);
+    -ms-transform: scale(1.1,1.1);
+     -o-transform: scale(1.1,1.1);
+        transform: scale(1.1,1.1);}
+
 
 
 

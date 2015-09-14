@@ -9,20 +9,24 @@ var positive = new Object();
 var negative = new Object();
 var ubicacion = [0]; //1 last
 var usuario = [];
+var eres="";
+var resultado = new Object;
+
 positive.seleccionadas = [];
 negative.seleccionadas = [];
+var tipo="";
 var registroJson = "";
-
 var nombre="";
 var genero="";
 var email ="";
 var nacimiento="";
-var ubicacion="";
+ubicacion[0]=0;
+
 
 
   window.fbAsyncInit = function() {
     FB.init({
-      appId      : '406344899565122',
+      appId      : '1687502038148059',
       xfbml      : true,
       version    : 'v2.4'
     });
@@ -43,9 +47,8 @@ function ingresar_facebook (argument) {
 		console.log('Welcome!  Fetching your information.... ');
 		FB.api('/me', function(response) {
 		console.log('Good to see you, ' + response.name + '.');
-		permitir();
-		//mostrarHTML("seleccionGenero");
-		});
+		permitir();	});
+
 		} else {
 		console.log('User cancelled login or did not fully authorize.');
 		}
@@ -79,23 +82,17 @@ usuario=[nombre,genero,email,nacimiento,ubicacion];
 });
 }
 
-  function mostrar_mensaje (argument) {
-	FB.ui({
-		method: 'share_open_graph',
-		action_type: 'og.likes',
-		action_properties: JSON.stringify({
-		object:'https://developers.facebook.com/docs/',
-	})
-	}, function(response){
-	// Debug response (optional)
-	console.log(response);
-	});
-  	
+  function mostrar_mensaje (web) {
+uri="http://camoranns.com/test-app/app/poll/resultados/data/"+tipo+"";
+FB.ui({
+  method: 'share_open_graph',
+  action_type: 'og.likes',
+  action_properties: JSON.stringify({
+      object: uri,
+  })
+}, function(response){});
+
   }
-
-
-
-
 
 
 /*----------  COMENZAR TEST  ----------*/
@@ -112,6 +109,7 @@ $( "#comienzo-test" ).click(function() {
 $('#cambio').on("click","#female",function(event) {
 	console.log("seleccionaste mujer");
 	mostrarHTML("female/seleccionar_tipo");
+
 });
 
 $('#cambio').on("click","#male",function(event) {
@@ -127,61 +125,16 @@ $('#cambio').on("click","#male",function(event) {
 
 function pasadorPreguntas(npasador){
 	var np = contarPreguntas ();
-
 	if(np <= np && np > 0){
-		//$("[data-pregunta='"++"']")
 		sl = 2;
 		var valorboton=(parseInt(npasador));
 		return (valorboton);
 		 
 	}
-
 }
-
-
-$("body").on('click', '.pasadores', function(event) {
-btn=$(this).attr("id");
-np = contarPreguntas ();
-
-
-
-
-switch (btn){
- 	case"atras":
- 		if (ubicacion[0]>=1) {
- 			ubicacion[0] = ubicacion[0]-1;
-
- 		}else if(ubicacion[0]==0)
- 		{	$("#atras").removeAttr("data-slide");
- 		}
-
- 		else{console.log("Desactivado");}
-
- 	break;
-
- 	case"adelante":
- 	if (ubicacion[0]==0 && ubicacion[0]< np) {
- 		$("#atras").attr("data-slide","prev");
- 		ubicacion[0] = ubicacion[0]+1;
- 	}else if(ubicacion[0]>=0)
-		{ubicacion[0] = ubicacion[0]+1;
-		$("#atras").attr("data-slide","prev");
-		} 
-
- 	break
-
-
- 	default:console.log("pasadores");
- 	break;
- }
-
-});
-
 
 $("body").on('click', '#finalizar-test', function(event) {
 
-
-//usuario=[nombre,genero,email,nacimiento,ubicacion];
 registro.nombre=nombre
 registro.genero=genero;
 registro.email=email;
@@ -190,55 +143,21 @@ registro.ubicacion=ubicacion;
 registro.positivas= positive.seleccionadas;
 registro.negativas= negative.seleccionadas;
 
-
 console.log("Objeto js creado:  "+registro);
-
-
 registroJson = JSON.stringify(registro);
-
-
 $.post('app/server/registro.php', {registro: registroJson},
     function(respuesta) {
         console.log(respuesta);
-}).error(
-    function(){
+		mostrarHTML(eres);
+		
+        $(".pasadores").css('display','none');
+	}).error(
+    	function(){
         console.log('Error al ejecutar la petición');
-    }
-);
-
-
+    		}
+		);
 });
 
-
-
-/*
-$("body").on('click', '.pasadores', function(event) {
-var data_pasador = $(this).attr('data-pasador');
-npasador= pasadorPreguntas(data_pasador);
-
-np = contarPreguntas ();
-	if(np <= np && ubicacion[0] >= 1 && ubicacion[0] <= np){
-		contador = ubicacion[0];
-		preg = npasador;
-		mostrar = contador+(preg);
-
-		var selector=".pregunta:nth-child("+mostrar+")";
-
-		var quitar=".pregunta:nth-child("+contador+")";
-
-		$(quitar).css('display', 'none');
-		console.log('dja de verse :div.pregunta: '+quitar);
-
-		$(selector).attr('style', 'display:block');
-		console.log('se muestra :div.pregunta: '+selector);
-		ubicacion[0]=mostrar;
-		var contador=+npasador;     
-	}
-	else{
-	console.log('No continua');}
-
-});
-*/
 
 
 
@@ -249,25 +168,34 @@ $('.carousel').carousel({interval: false,keyboard:false,});
 switch(style_female){
 	case "tipo-1":
 		console.log("tipo 1");		
-		mostrarHTML("male/tipo1");		
+		mostrarHTML("male/tipo1");
+		tipo="expresivo.html";
+		eres = "resultados/resultado1";
+
 		mostrarBotones();		
 		break;
 
 	case "tipo-2":
 		console.log("tipo 2");
 		mostrarHTML("male/tipo2");
+		tipo="creativo.html";
+		eres = "resultados/resultado2";	
 		mostrarBotones();
 	break;
 
 	case "tipo-3":
 		console.log("tipo 3");
 		mostrarHTML("male/tipo3");
+		tipo="aventurero.html";
+		eres = "resultados/resultado3";	
 		mostrarBotones();
 		break;
 
 	case "tipo-4":
 		console.log("tipo 4");
-		mostrarHTML("male/tipo4");		
+		mostrarHTML("male/tipo4");
+		tipo="analitico.html";
+		eres = "resultados/resultado4";			
 		mostrarBotones();
 		break;
 
@@ -293,20 +221,12 @@ switch(style_female){
 		mostrarHTML("female/tipo2");
 		mostrarBotones();
 	break;
-	case "tipo-3":
-		console.log("tipo 3");
-		mostrarHTML("female/tipo3");
-		mostrarBotones();
-	break;
 	default:
 		console.log("Indefinido");
 		break;
 } });
 
-function mostrarHTML (tipo){
-	
-    $("#cambio").load("app/poll/"+tipo+".html");  	
-	};
+function mostrarHTML (tipo)	{$("#cambio").load("app/poll/"+tipo+".html");};
 
 function mostrarBotones(npreguntas){
 	$("#pasadores").css('display','inline-block');
@@ -316,6 +236,9 @@ function contarPreguntas () {
 	return ($("[data-id|='cuestionario']").length);
 }
 
+function insertarMeta () {
+	$("head").append('<meta property="og:url" content="https://example.com/path" /><meta property="og:type"   content="website" /><meta property="og:title"  content="'+resultado.titulo+'" /><meta property="og:description"   content="'+resultado.mensaje+'" /><meta property="og:image"   content="'+resultado.imagen+'" />');
+}
 
 
 function verificarRating (mycues,rating) {
