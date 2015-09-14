@@ -3,22 +3,105 @@
 *Carlos Morán
 *https://developers.facebook.com/docs/graph-api/reference/user
 */
-
+var registro = new Object();
 var tipo_pregunta = true;
 var positive = new Object();
 var negative = new Object();
-var ubicacion = [1];
+var ubicacion = [0]; //1 last
+var usuario = [];
 positive.seleccionadas = [];
 negative.seleccionadas = [];
+var registroJson = "";
+
+var nombre="";
+var genero="";
+var email ="";
+var nacimiento="";
+var ubicacion="";
+
+
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '406344899565122',
+      xfbml      : true,
+      version    : 'v2.4'
+    });
+  };
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+
+
+function ingresar_facebook (argument) {
+
+	FB.login(function(response) {
+		if (response.authResponse) {
+		console.log('Welcome!  Fetching your information.... ');
+		FB.api('/me', function(response) {
+		console.log('Good to see you, ' + response.name + '.');
+		permitir();
+		//mostrarHTML("seleccionGenero");
+		});
+		} else {
+		console.log('User cancelled login or did not fully authorize.');
+		}
+	}, {scope: 'email,user_birthday,user_location'}     );
+
+}
+
+
+function permitir (argument) {
+
+FB.api('/me', {fields: 'name,gender,email,hometown,birthday,location'}, function(response) {
+console.log(response);
+console.log("respuesta "+response.location.name);
+
+nombre=response.name;
+genero=response.gender;
+email =response.email;
+nacimiento=response.birthday;
+ubicacion=response.location.name;
+usuario=[nombre,genero,email,nacimiento,ubicacion];
+
+	if (genero=="male") {
+		console.log("Eres hombre");
+		mostrarHTML("male/seleccionar_tipo");
+
+	}else{
+		console.log("Eres mujer");
+		mostrarHTML("female/seleccionar_tipo");
+	};
+
+});
+}
+
+  function mostrar_mensaje (argument) {
+	FB.ui({
+		method: 'share_open_graph',
+		action_type: 'og.likes',
+		action_properties: JSON.stringify({
+		object:'https://developers.facebook.com/docs/',
+	})
+	}, function(response){
+	// Debug response (optional)
+	console.log(response);
+	});
+  	
+  }
+
+
+
 
 
 
 /*----------  COMENZAR TEST  ----------*/
 
-
-$("#comienzo-test").on("click",function(event) 
-{	  
-mostrarHTML("seleccionGenero");
+$( "#comienzo-test" ).click(function() {
+	ingresar_facebook();
 });
 
 /*----------  COMENZAR TEST  ----------*/
@@ -54,6 +137,79 @@ function pasadorPreguntas(npasador){
 	}
 
 }
+
+
+$("body").on('click', '.pasadores', function(event) {
+btn=$(this).attr("id");
+np = contarPreguntas ();
+
+
+
+
+switch (btn){
+ 	case"atras":
+ 		if (ubicacion[0]>=1) {
+ 			ubicacion[0] = ubicacion[0]-1;
+
+ 		}else if(ubicacion[0]==0)
+ 		{	$("#atras").removeAttr("data-slide");
+ 		}
+
+ 		else{console.log("Desactivado");}
+
+ 	break;
+
+ 	case"adelante":
+ 	if (ubicacion[0]==0 && ubicacion[0]< np) {
+ 		$("#atras").attr("data-slide","prev");
+ 		ubicacion[0] = ubicacion[0]+1;
+ 	}else if(ubicacion[0]>=0)
+		{ubicacion[0] = ubicacion[0]+1;
+		$("#atras").attr("data-slide","prev");
+		} 
+
+ 	break
+
+
+ 	default:console.log("pasadores");
+ 	break;
+ }
+
+});
+
+
+$("body").on('click', '#finalizar-test', function(event) {
+
+
+//usuario=[nombre,genero,email,nacimiento,ubicacion];
+registro.nombre=nombre
+registro.genero=genero;
+registro.email=email;
+registro.nacimiento=nacimiento;
+registro.ubicacion=ubicacion;
+registro.positivas= positive.seleccionadas;
+registro.negativas= negative.seleccionadas;
+
+
+console.log("Objeto js creado:  "+registro);
+
+
+registroJson = JSON.stringify(registro);
+
+
+$.post('app/server/registro.php', {registro: registroJson},
+    function(respuesta) {
+        console.log(respuesta);
+}).error(
+    function(){
+        console.log('Error al ejecutar la petición');
+    }
+);
+
+
+});
+
+
 
 /*
 $("body").on('click', '.pasadores', function(event) {

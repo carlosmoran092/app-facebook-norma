@@ -9,13 +9,13 @@
 .genero>img:hover{border:5px solid rgb(0, 131, 169);-webkit-webkit-transition: 0.4;
 	-moz-webkit-transition: 0.4;-ms-webkit-transition: 0.4;-o-webkit-transition: 0.4;
 	webkit-transition: 0.4; cursor: pointer;}
-#comienzo-test{-webkit-webkit-transition: 0.4;
+#comienzo-test,#finalizar-test{-webkit-webkit-transition: 0.4;
 	-moz-webkit-transition: 0.4;-ms-webkit-transition: 0.4;-o-webkit-transition: 0.7;
 	webkit-transition: 0.4; cursor: pointer;}
 
-#comienzo-test{float: left; top: 83%; left: 37%; position: absolute;}
+#comienzo-test,#finalizar-test{float: left; top: 83%; left: 37%; position: absolute;}
 .pasadores{max-width: 200px; display: inline-block;float: left;margin-right: 15px; transition: 0.8s; -moz-transition:0.8s;}
-#comienzo-test:hover,.pasadores:hover{cursor:pointer;-webkit-transform: -webkit-transform: scale(1.1,1.1);
+#comienzo-test:hover,#finalizar-test:hover,.pasadores:hover{cursor:pointer;-webkit-transform: -webkit-transform: scale(1.1,1.1);
 -ms-transform: scale(1.1,1.1);
 -o-transform: scale(1.1,1.1);
 transform: scale(1.1,1.1); ;}
