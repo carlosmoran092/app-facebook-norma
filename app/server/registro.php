@@ -1,8 +1,8 @@
 <?php
 $servername = "localhost";
-$username = "waltgc5_moran";
-$password = "rock1992";
-$dbname = "waltgc5_test";
+$username = "albacorp_test";
+$password = "oL38HSZ^WRs4";
+$dbname = "albacorp_app_facebook";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
