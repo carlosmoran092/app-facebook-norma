@@ -3,27 +3,53 @@
 <head>
 
   <meta charset="UTF-8">
-  <meta http-equiv="PRAGMA" content="NO-CACHE">
+  <meta http-equiv="pragma" content="no-cache">
 
-  <title>APP DEV</title>
   <link rel="stylesheet" href="app/bower_components/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" href="app/css/main.css">
+
+  <title>Qúe tipo de persona eres</title>
+  
+<meta property="description" content="¿Eres una persona expresiva? o por el contrario ¿Eres un poco más analítica? Descubre que tipo de persona eres según te identifiques con las siguientes imágenes." />
+<meta property="og:url"  content="http://corporativomartinalba.com/test/" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Qué tipo de persona eres" />
+<meta property="og:description" content="¿Eres una persona expresiva? o por el contrario ¿Eres un poco más analítica? Descubre que tipo de persona eres según te identifiques con las siguientes imágenes." />
+<meta property="og:image" content="http://corporativomartinalba.com/test/app/img/Logo_1024x1024.jpg" />
+
+
+
     
 </head>
 <body>
 
-<div id="status">
-</div>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.4&appId=1687502038148059";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 
 
-<div class="container-fluid">
 
-  <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1" data-estilo="1">
+
+
+
+<div class="container">
+<center><div>
+<div class="fb-send" data-href="http://corporativomartinalba.com/test/"></div>
+<div class="fb-like" data-href="http://corporativomartinalba.com/test/" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
+</div></center>
+
+
+  <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 col-lg-10 col-lg-offset-1" data-estilo="1">
 
     <div id="cambio">         
        
     <img src="app/img/inicio/fondo.jpg" class="img-responsive" alt="">
-    <img src="app/img/inicio/boton.png"  class="img-responsive col-md-3 col-sm-3 col-xs-3" width="185" id="comienzo-test">
+    <img src="app/img/inicio/boton.png"  class="img-responsive col-lg-3 col-md-3 col-sm-3 col-xs-3" width="185" id="comienzo-test">
     
     </div><!-- End Cambio -->
   </div>
@@ -47,9 +73,7 @@
 </div>
   
   <script src="app/bower_components/jquery/dist/jquery.js"></script>
-
   <script type="text/javascript" src="app/bower_components/bootstrap/dist/js/bootstrap.js"></script>
-
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
   <script src="app/bower_components/jquery-ui/ui/effect-shake.js"></script>
   <script type="text/javascript" src="app/js/app.js"></script>
@@ -57,8 +81,8 @@
 
 
  
-<!--
- <script src="app/js/jquery.nicescroll.min.js"></script>
+
+ <!--<script src="app/js/jquery.nicescroll.min.js"></script>
   <script>
 
 $(document).ready( function() { var nice = false;nice = $("html").niceScroll({cursorcolor:"rgb(0, 131, 169)",cursorwidth:"10px"});});

@@ -48,7 +48,6 @@ function ingresar_facebook (argument) {
 		FB.api('/me', function(response) {
 		console.log('Good to see you, ' + response.name + '.');
 		permitir();	});
-
 		} else {
 		console.log('User cancelled login or did not fully authorize.');
 		}
@@ -82,17 +81,26 @@ usuario=[nombre,genero,email,nacimiento,ubicacion];
 });
 }
 
-  function mostrar_mensaje (web) {
-uri="http://camoranns.com/test-app/app/poll/resultados/data/"+tipo+"";
+  function mostrar_mensaje () {
+uri="http://corporativomartinalba.com/test/app/poll/resultados/data/"+tipo+"";
 FB.ui({
-  method: 'share_open_graph',
-  action_type: 'og.likes',
-  action_properties: JSON.stringify({
-      object: uri,
-  })
+  method: 'share',
+  href: uri,
 }, function(response){});
-
   }
+
+
+// INCLUIR META
+/*
+<meta property="og:title" content="Mi resultado es: “Analítico” - ¿y tú, qué tipo de persona eres?" />
+<meta property="og:site_name" content="Encuesta Norma"/>
+<meta property="og:url" content="http://corporativomartinalba.com/test/" />
+<meta property="og:description" content="¡Te gusta analizar y entender todo! Eres centrado,
+organizado y cuidadoso pero también curioso, prefieres soluciones racionales que emocionales por eso te interesas en los detalles y eres muy buen observador." />
+<meta property="og:image" content="http://camoranns.com/test-app/app/img/resultados/data/male/Resultado_Fb_Analitico.jpg" />
+<meta property="fb:app_id" content="1687502038148059" />
+<meta property="og:type" content="website" />
+*/
 
 
 /*----------  COMENZAR TEST  ----------*/
@@ -156,6 +164,9 @@ $.post('app/server/registro.php', {registro: registroJson},
         console.log('Error al ejecutar la petición');
     		}
 		);
+
+
+
 });
 
 
@@ -171,7 +182,6 @@ switch(style_female){
 		mostrarHTML("male/tipo1");
 		tipo="expresivo.html";
 		eres = "resultados/resultado1";
-
 		mostrarBotones();		
 		break;
 
@@ -195,7 +205,7 @@ switch(style_female){
 		console.log("tipo 4");
 		mostrarHTML("male/tipo4");
 		tipo="analitico.html";
-		eres = "resultados/resultado4";			
+		eres = "resultados/resultado4";		
 		mostrarBotones();
 		break;
 
@@ -213,12 +223,17 @@ switch(style_female){
 	case "tipo-1":
 		console.log("tipo 1");		
 		mostrarHTML("female/tipo1");
-		mostrarBotones();		
+		mostrarBotones();
+		eres = "resultados/resultado5";			
+		mostrarBotones();
+
 		break;
 
 	case "tipo-2":
 		console.log("tipo 2");
 		mostrarHTML("female/tipo2");
+		mostrarBotones();
+		eres = "resultados/resultado6";			
 		mostrarBotones();
 	break;
 	default:

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="refresh" content="1; url=javascript:window.close();"> 
+	<title>Gracias por participar</title>
+</head>
+<body onLoad="JavaScript:Cerraraliniciar()">
+<script language="JavaScript">
+function Cerraraliniciar(){
+var id;
+id = setTimeout("cerrar()", 1000);
+}
+function cerrar() {
+var ventana = window.self;
+ventana.opener = window.self;
+ventana.close();
+}
+</script>
+	
+</body>
+</html>
