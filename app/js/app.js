@@ -22,7 +22,8 @@ var email ="";
 var nacimiento="";
 ubicacion[0]=0;
 
-
+var animal_book=[];
+var kiut = []
 
   window.fbAsyncInit = function() {
     FB.init({
@@ -39,7 +40,6 @@ ubicacion[0]=0;
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
 
-
 function ingresar_facebook (argument) {
 
 	FB.login(function(response) {
@@ -54,6 +54,12 @@ function ingresar_facebook (argument) {
 	}, {scope: 'email,user_birthday,user_location'}     );
 
 }
+
+/**
+	PERMITIR:
+	- Solicitar permisos al usuario
+	- Retornar datos y almacenarlos
+ */
 
 
 function permitir (argument) {
@@ -72,7 +78,6 @@ usuario=[nombre,genero,email,nacimiento,ubicacion];
 	if (genero=="male") {
 		console.log("Eres hombre");
 		mostrarHTML("male/seleccionar_tipo");
-
 	}else{
 		console.log("Eres mujer");
 		mostrarHTML("female/seleccionar_tipo");
@@ -80,27 +85,6 @@ usuario=[nombre,genero,email,nacimiento,ubicacion];
 
 });
 }
-
-  function mostrar_mensaje () {
-uri="http://corporativomartinalba.com/test/app/poll/resultados/data/"+tipo+"";
-FB.ui({
-  method: 'share',
-  href: uri,
-}, function(response){});
-  }
-
-
-// INCLUIR META
-/*
-<meta property="og:title" content="Mi resultado es: “Analítico” - ¿y tú, qué tipo de persona eres?" />
-<meta property="og:site_name" content="Encuesta Norma"/>
-<meta property="og:url" content="http://corporativomartinalba.com/test/" />
-<meta property="og:description" content="¡Te gusta analizar y entender todo! Eres centrado,
-organizado y cuidadoso pero también curioso, prefieres soluciones racionales que emocionales por eso te interesas en los detalles y eres muy buen observador." />
-<meta property="og:image" content="http://camoranns.com/test-app/app/img/resultados/data/male/Resultado_Fb_Analitico.jpg" />
-<meta property="fb:app_id" content="1687502038148059" />
-<meta property="og:type" content="website" />
-*/
 
 
 /*----------  COMENZAR TEST  ----------*/
@@ -110,7 +94,6 @@ $( "#comienzo-test" ).click(function() {
 });
 
 /*----------  COMENZAR TEST  ----------*/
-
 
 
 /*----------  HOMBRE O MUJER  ----------*/
@@ -131,15 +114,27 @@ $('#cambio').on("click","#male",function(event) {
 =     FUNCIÓN PASADOR DE PREGUNTAS    =
 =========================================*/
 
+$('body').on('click', '.pasadores', function(event) {
+	ir_arriba();
+});
+
 function pasadorPreguntas(npasador){
 	var np = contarPreguntas ();
 	if(np <= np && np > 0){
 		sl = 2;
 		var valorboton=(parseInt(npasador));
-		return (valorboton);
-		 
+		return (valorboton);		 
 	}
 }
+
+
+/**
+	CLICK EN BOTÓN FINALIZAR TEST:
+	- Guarda los valores del objeto registro y los pasa a un objeto JSON 
+	- Envia datos JSON a registro.php
+ */
+
+
 
 $("body").on('click', '#finalizar-test', function(event) {
 
@@ -168,7 +163,6 @@ $.post('app/server/registro.php', {registro: registroJson},
 
 
 });
-
 
 
 
@@ -224,17 +218,14 @@ switch(style_female){
 		console.log("tipo 1");		
 		mostrarHTML("female/tipo1");
 		mostrarBotones();
-		eres = "resultados/resultado5";			
-		mostrarBotones();
-
+		eres = "resultados/resultado5";	
 		break;
 
 	case "tipo-2":
 		console.log("tipo 2");
 		mostrarHTML("female/tipo2");
 		mostrarBotones();
-		eres = "resultados/resultado6";			
-		mostrarBotones();
+		eres = "resultados/resultado6";	
 	break;
 	default:
 		console.log("Indefinido");
@@ -245,7 +236,25 @@ function mostrarHTML (tipo)	{$("#cambio").load("app/poll/"+tipo+".html");};
 
 function mostrarBotones(npreguntas){
 	$("#pasadores").css('display','inline-block');
-	}
+}
+
+
+function verificarCategoria(){
+
+	nselect=positive.seleccionadas.length;
+	for (var i = nselect - 1; i >= 0; i--) {
+		texto=positive.seleccionadas[i].toUpperCase();
+		if(texto.search("KIUT") != -1){
+			kiut.push("1");
+		}else {console.log('error');}
+		if(texto.search("ANIMAL_BOOK") != -1){
+			animal_book.push("1");
+		}else{console.log("error")}		
+	};//end for
+	ab=animal_book.length;
+	ki=kiut.length;	
+}
+
 
 function contarPreguntas () {
 	return ($("[data-id|='cuestionario']").length);
@@ -255,6 +264,11 @@ function insertarMeta () {
 	$("head").append('<meta property="og:url" content="https://example.com/path" /><meta property="og:type"   content="website" /><meta property="og:title"  content="'+resultado.titulo+'" /><meta property="og:description"   content="'+resultado.mensaje+'" /><meta property="og:image"   content="'+resultado.imagen+'" />');
 }
 
+function ir_arriba(){
+	jQuery('body,html').animate({
+	scrollTop: 0
+	}, 100);
+}
 
 function verificarRating (mycues,rating) {
 	if(mycues%2==0 && rating!="undefined"){
@@ -288,7 +302,7 @@ function verificarRating (mycues,rating) {
 /*----------  FIN ESTILO MUJER  ----------*/
 
 $("#cambio" ).on("click",".portada",function() {
-	
+
   	var id = $(this).attr("id");
     var activo = $(this).attr('data-active');
     console.log(activo);
