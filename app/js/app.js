@@ -7,7 +7,8 @@ var registro = new Object();
 var tipo_pregunta = true;
 var positive = new Object();
 var negative = new Object();
-var ubicacion = [0]; //1 last
+var posicion = new Array();
+posicion.push(0);
 var usuario = [];
 var eres="";
 var resultado = new Object;
@@ -20,7 +21,8 @@ var nombre="";
 var genero="";
 var email ="";
 var nacimiento="";
-ubicacion[0]=0;
+
+var nice = false;
 
 var animal_book=[];
 var kiut = []
@@ -56,6 +58,43 @@ function ingresar_facebook (argument) {
 }
 
 /**
+
+	Elimina botones cuando se llega al final de la encuesta:
+
+ */
+
+
+function reg_posicion () {
+	np= contarPreguntas();
+	pos= posicion[0];
+
+	console.log('numero de preguntas: '+np+" posición: "+pos);
+	 if(pos==np-1){
+	 	$("#pasadores").css('display', 'none');
+	 }else if(pos<1){
+	 	$("#atras").css('display', 'none');
+	 }
+
+}
+
+
+
+$("body").on('click', '#adelante', function(event) {
+	console.log('next');
+	$("#atras").css('display', 'inline-block');
+	posicion[0]+=1;
+	reg_posicion ();
+});
+
+$("body").on('click', '#atras', function(event) {
+	console.log('prev');
+	posicion[0]-=1
+	reg_posicion ();
+
+});
+
+
+/**
 	PERMITIR:
 	- Solicitar permisos al usuario
 	- Retornar datos y almacenarlos
@@ -82,10 +121,8 @@ usuario=[nombre,genero,email,nacimiento,ubicacion];
 		console.log("Eres mujer");
 		mostrarHTML("female/seleccionar_tipo");
 	};
-
 });
 }
-
 
 /*----------  COMENZAR TEST  ----------*/
 
@@ -100,7 +137,6 @@ $( "#comienzo-test" ).click(function() {
 $('#cambio').on("click","#female",function(event) {
 	console.log("seleccionaste mujer");
 	mostrarHTML("female/seleccionar_tipo");
-
 });
 
 $('#cambio').on("click","#male",function(event) {
@@ -116,6 +152,7 @@ $('#cambio').on("click","#male",function(event) {
 
 $('body').on('click', '.pasadores', function(event) {
 	ir_arriba();
+
 });
 
 function pasadorPreguntas(npasador){
@@ -135,7 +172,6 @@ function pasadorPreguntas(npasador){
  */
 
 
-
 $("body").on('click', '#finalizar-test', function(event) {
 
 registro.nombre=nombre
@@ -152,24 +188,21 @@ $.post('app/server/registro.php', {registro: registroJson},
     function(respuesta) {
         console.log(respuesta);
 		mostrarHTML(eres);
-		
+				
         $(".pasadores").css('display','none');
 	}).error(
     	function(){
         console.log('Error al ejecutar la petición');
     		}
 		);
-
-
-
 });
-
 
 
 /*---------- HOMBRES  ----------*/
 $('#cambio').on("click",".btn-style-male",function(event){
 style_female=$(this).attr("data-select");
-$('.carousel').carousel({interval: false,keyboard:false,});
+$('.carousel').carousel({interval: true,keyboard:false,});
+
 switch(style_female){
 	case "tipo-1":
 		console.log("tipo 1");		
@@ -232,10 +265,11 @@ switch(style_female){
 		break;
 } });
 
-function mostrarHTML (tipo)	{$("#cambio").load("app/poll/"+tipo+".html");};
+function mostrarHTML (tipo)	{$("#cambio").load("app/poll/"+tipo+".html")};
 
-function mostrarBotones(npreguntas){
+function mostrarBotones(npreguntas){	
 	$("#pasadores").css('display','inline-block');
+	$("#atras").css('display', 'none');
 }
 
 
@@ -258,10 +292,6 @@ function verificarCategoria(){
 
 function contarPreguntas () {
 	return ($("[data-id|='cuestionario']").length);
-}
-
-function insertarMeta () {
-	$("head").append('<meta property="og:url" content="https://example.com/path" /><meta property="og:type"   content="website" /><meta property="og:title"  content="'+resultado.titulo+'" /><meta property="og:description"   content="'+resultado.mensaje+'" /><meta property="og:image"   content="'+resultado.imagen+'" />');
 }
 
 function ir_arriba(){
@@ -332,7 +362,7 @@ $("#cambio" ).on("click",".portada",function() {
 		$("[data-name="+nameportada+"]").attr('rating',key[0]);
 		$("[data-name="+nameportada+"]").attr('data-active',key[0]);
 		$(this).parents("span:first").css('background', '#C6E7F6');
-		$("[data-name="+nameportada+"]").css('outline','1px solid #0083A9');
+		$("[data-name="+nameportada+"]").css('opacity','0.5');
 		console.log("Incrustado rating: "+key[0])	
 
 
@@ -351,6 +381,7 @@ $("#cambio" ).on("click",".portada",function() {
 					$(this).parents("span:first").css('background', '#fff');
 					$("[data-name="+removeItem+"]").removeAttr('rating').removeAttr('data-active');
 					$("[data-name="+nameportada+"]").css('outline','none');
+					$("[data-name="+nameportada+"]").css('opacity','1');
 					break;
 				case "negative":
 					negative.seleccionadas = jQuery.grep(negative.seleccionadas, function(value) {
@@ -359,6 +390,7 @@ $("#cambio" ).on("click",".portada",function() {
 					$(this).parents("span:first").css('background', '#fff');
 					$("[data-name="+removeItem+"]").removeAttr('rating').removeAttr('data-active');
 					$("[data-name="+nameportada+"]").css('outline','none');
+					$("[data-name="+nameportada+"]").css('opacity','1');
 					break;
 				default:
 					console.log('error en elminación');
